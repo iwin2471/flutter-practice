@@ -11,24 +11,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TodoBloc>(
+    return MaterialApp(
+      title: 'Todo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: BlocProvider<TodoBloc>(
         create: (BuildContext context) => TodoBloc([
-              Todo(
-                id: 1,
-                title: "test",
-                summary: "test",
-                dateTime: new DateTime.now(),
-              )
-            ]),
-        child: MaterialApp(
-          title: 'Todo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: TodoListPage(),
-          routes: {
-            "/add": (BuildContext context) => AddTodo(),
-          },
-        ));
+          Todo(
+            id: 1,
+            title: "test",
+            summary: "test",
+            dateTime: new DateTime.now(),
+          )
+        ]),
+        child: TodoListPage(),
+      ),
+      routes: {
+        "/add": (BuildContext context) => AddTodo(),
+      },
+    );
   }
 }

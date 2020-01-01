@@ -10,45 +10,54 @@ class TodoListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildBody(context);
+    final counterBloc = BlocProvider.of<TodoBloc>(context);
+    return buildBody(context, counterBloc);
   }
 
-  Scaffold buildBody(BuildContext context) {
+  Scaffold buildBody(BuildContext context, TodoBloc counterBloc) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                Navigator.pushNamed(context, "/add");
-              },
-            ),
-          ],
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute<AddTodo>(
+                      builder: (context) {
+                        return BlocProvider.value(
+                          value: counterBloc,
+                          child: AddTodo(),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-      body: BlocBuilder<TodoBloc, TodoState>(
-        builder: (BuildContext context, TodoState state) {
-          if (state is InitialTodoState) {
-            return Container();
-          } else if (state is Initialized) {
-            return ListView(
-              children: state.todoList
-                  .map<Widget>((todo) => todoWidget(todo))
-                  .toList(),
-            );
-          } else if (state is Modified) {
-            return ListView(
-              children: state.todoList
-                  .map<Widget>((todo) => todoWidget(todo))
-                  .toList(),
-            );
-          }
-        },
-      ),
-    );
+        body: BlocBuilder<TodoBloc, TodoState>(
+          builder: (BuildContext context, TodoState state) {
+            if (state is InitialTodoState) {
+              return Container();
+            } else if (state is Initialized) {
+              return ListView(
+                children: state.todoList
+                    .map<Widget>((todo) => todoWidget(todo))
+                    .toList(),
+              );
+            } else if (state is Modified) {
+              return ListView(
+                children: state.todoList
+                    .map<Widget>((todo) => todoWidget(todo))
+                    .toList(),
+              );
+            }
+          },
+        ));
   }
 
   Widget todoWidget(Todo todo) {

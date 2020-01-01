@@ -1,3 +1,4 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musto/features/todo/data/models/Todo.dart';
@@ -61,7 +62,6 @@ class AddTodo extends StatelessWidget {
                           title: _formData["title"],
                           summary: _formData["summary"],
                           dateTime: new DateTime.now());
-
                       BlocProvider.of<TodoBloc>(context).add(Add(todo: _todo));
                       Navigator.pop(context);
                     }
