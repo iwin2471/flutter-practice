@@ -19,7 +19,7 @@ class Add extends TodoEvent {
 class Delete extends TodoEvent {
   final Todo todo;
 
-  Delete(this.todo);
+  Delete({@required this.todo});
 
   @override
   // TODO: implement props

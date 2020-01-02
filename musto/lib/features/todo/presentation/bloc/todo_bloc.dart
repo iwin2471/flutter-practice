@@ -20,6 +20,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       yield Modified(todoList);
     } else if (event is Delete) {
       todoList.remove(event.todo);
+      print(todoList);
       yield Modified(todoList);
     }
   }

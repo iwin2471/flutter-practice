@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:musto/features/todo/data/models/Todo.dart';
+import 'package:musto/features/todo/presentation/bloc/bloc.dart';
 import 'package:musto/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:musto/features/todo/presentation/bloc/todo_state.dart';
 import 'package:musto/features/todo/presentation/pages/add_todo.dart';
@@ -46,13 +47,13 @@ class TodoListPage extends StatelessWidget {
             } else if (state is Initialized) {
               return ListView(
                 children: state.todoList
-                    .map<Widget>((todo) => todoWidget(todo))
+                    .map<Widget>((todo) => todoWidget(context, todo))
                     .toList(),
               );
             } else if (state is Modified) {
               return ListView(
                 children: state.todoList
-                    .map<Widget>((todo) => todoWidget(todo))
+                    .map<Widget>((todo) => todoWidget(context, todo))
                     .toList(),
               );
             }
@@ -60,14 +61,26 @@ class TodoListPage extends StatelessWidget {
         ));
   }
 
-  Widget todoWidget(Todo todo) {
-    return Card(
-      child: Column(
-        children: <Widget>[
-          Text(todo.title),
-          Text(todo.summary),
-        ],
+  Widget todoWidget(context, Todo todo) {
+    return Dismissible(
+      direction: DismissDirection.endToStart,
+      key: Key("${todo.id}"),
+      background: Container(
+        alignment: AlignmentDirectional.centerEnd,
+        color: Colors.red,
+        child: Icon(Icons.delete),
       ),
+      child: Card(
+        child: Column(
+          children: <Widget>[
+            Text(todo.title),
+            Text(todo.summary),
+          ],
+        ),
+      ),
+      onDismissed: (DismissDirection direction) {
+        BlocProvider.of<TodoBloc>(context).add(Delete(todo: todo));
+      },
     );
   }
 }
