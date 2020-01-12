@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "425907699434",
+    "firebase_url": "https://retrospect-78bab.firebaseio.com",
+    "project_id": "retrospect-78bab",
+    "storage_bucket": "retrospect-78bab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425907699434:android:bfbda36bdf5f9ad35b2193",
+        "android_client_info": {
+          "package_name": "kim.younjune.retrospect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425907699434-2uf13p710171nra3khugk6nm0rmcse70.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgC3Vc5jdxBL0vm8dewBMSwUybc8i2u6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425907699434-2uf13p710171nra3khugk6nm0rmcse70.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
